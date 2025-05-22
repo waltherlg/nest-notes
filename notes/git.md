@@ -21,3 +21,11 @@ git remote add origin https://github.com/твой-ник/имя-репозито
 git branch -M main
 git push -u origin main
 Теперь проект залит в GitHub
+
+нужно добавить какие файлы не будут попатать в гитхаб,
+то есть в файл .gitignore добавить
+.env
+.local.env
+*.local.env
+.*.local.env
+что бы наши локальные переменные окружения не добавлялись в гитхаб
