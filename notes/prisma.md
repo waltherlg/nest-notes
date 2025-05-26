@@ -9,6 +9,11 @@
 После генерации будет создана папка призма с schema.prisma, .env(с примером url подключения) и gitignore.
 по сути два последних файла можно удалить, так как у нас они есть в глобальной папке
 
+После инициализации призмы, нужно ее сгенерировать. это команда pnpm prisma generate
+Так как у меня она инициализирована не в корневой папке, нужно добавить путь:
+pnpm prisma generate --schema=apps/nest-notes/src/db/prisma/schema.prisma
+Prisma schema loaded from apps\nest-notes\src\db\prisma\schema.prisma
+
 все модельки сущностей будем создавать именно в файле schema.prisma и только там (так устроена призма).
 
 model User {

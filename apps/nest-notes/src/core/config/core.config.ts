@@ -21,9 +21,11 @@ export class CoreConfig {
 
   @IsNotEmpty({
     message:
-      'Set Env variable DATABASE_URL, example: postgresql://user:password@localhost:5432/my-data-base',
+      'Set Env variable PRISMA_DATABASE_URL, example: postgresql://user:password@localhost:5432/my-data-base',
   })
-  databaseURL: string = this.configService.get<string>('DATABASE_URL');
+  prismaDatabaseURL: string = this.configService.get<string>(
+    'PRISMA_DATABASE_URL',
+  );
 
   @IsEnum(Environments, {
     message:
@@ -31,12 +33,6 @@ export class CoreConfig {
       configValidationUtility.getEnumValues(Environments).join(', '),
   })
   env: string = this.configService.get('NODE_ENV');
-
-  @IsNotEmpty({
-    message:
-      "Set Env variable ADMIN_CREDENTIALS, example: 'login:password', !!sensitive data!!",
-  })
-  adminCredentials: string = this.configService.get('ADMIN_CREDENTIALS');
 
   constructor(private configService: ConfigService<any, true>) {
     configValidationUtility.validateConfig(this);
