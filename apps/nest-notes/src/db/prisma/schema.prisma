@@ -13,7 +13,7 @@ datasource db {
   url      = env("PRISMA_DATABASE_URL")
 }
 
-model User {
+model PrismaUser {
   id       String @id @default(uuid()) @db.Uuid
   userName String @unique
   email    String @unique
