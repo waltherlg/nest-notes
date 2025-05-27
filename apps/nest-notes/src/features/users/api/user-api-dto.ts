@@ -8,3 +8,8 @@ export class UserUpdateInputDto {
   userName: string;
   email: string;
 }
+
+export class UserCreateInputDto {
+  userName: string;
+  email: string;
+}
