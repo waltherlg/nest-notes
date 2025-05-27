@@ -1,18 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { IUserRepository } from '../domain/interfaces/user.repository.interface';
+import { CreateUserDomainDto } from '../domain/dto/user-domain-dto';
+import { UserUpdateInputDto, UserViewDto } from '../api/user-api-dto';
+import { PrismaService } from '../../../db/prisma/prisma.service';
 
 @Injectable()
 export class PrismaUserRepository implements IUserRepository {
-  findById(id: string): Promise<User | null> {
-    throw new Error('Method not implemented.');
+  constructor(private readonly prisma: PrismaService) {}
+
+  async findById(id: string): Promise<UserViewDto | null> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    return user ? user : null;
   }
-  create(data: CreateUserDto): Promise<User> {
-    throw new Error('Method not implemented.');
+
+  async create(dto: CreateUserDomainDto): Promise<UserViewDto> {
+    const createdUser = await this.prisma.user.create({
+      data: { ...dto },
+    });
+    return createdUser;
   }
-  update(id: string, data: UpdateUserDto): Promise<User> {
-    throw new Error('Method not implemented.');
+
+  async update(id: string, data: UserUpdateInputDto): Promise<UserViewDto> {
+    const updatedUser = await this.prisma.user.update({
+      where: { id },
+      data: { ...data },
+    });
+    return updatedUser;
   }
-  delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async delete(id: string): Promise<void> {
+    await this.prisma.user.delete({ where: { id } });
   }
 }
