@@ -1,6 +1,10 @@
+import { UserUpdateInputDto, UserViewDto } from '../../api/user-api-dto';
+import { CreateUserDomainDto } from '../dto/user-domain-dto';
+
 export interface IUserRepository {
-  findById(id: string): Promise<User | null>;
-  create(data: CreateUserDto): Promise<User>;
-  update(id: string, data: UpdateUserDto): Promise<User>;
+  findAll(): Promise<UserViewDto[]>;
+  findById(id: string): Promise<UserViewDto | null>;
+  create(data: CreateUserDomainDto): Promise<UserViewDto>;
+  update(id: string, data: UserUpdateInputDto): Promise<UserViewDto>;
   delete(id: string): Promise<void>;
 }

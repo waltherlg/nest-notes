@@ -8,6 +8,11 @@ import { PrismaService } from '../../../db/prisma/prisma.service';
 export class PrismaUserRepository implements IUserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findAll(): Promise<UserViewDto[]> {
+    const users = await this.prisma.user.findMany({});
+    return users;
+  }
+
   async findById(id: string): Promise<UserViewDto | null> {
     const user = await this.prisma.user.findUnique({ where: { id } });
     return user ? user : null;
