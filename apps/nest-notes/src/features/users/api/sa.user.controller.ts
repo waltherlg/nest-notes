@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { PrismaUserRepository } from '../infrastructure/prisma.user.repository';
 import { UserCreateInputDto } from './user-api-dto';
 import { CreateUserDomainDto } from '../domain/dto/user-domain-dto';
@@ -18,5 +28,20 @@ export class UserController {
   async getAllUsers() {
     const users = await this.userRepository.findAll();
     return users;
+  }
+
+  @Get(':userId')
+  async getUserById(@Param('userId') userId: string) {
+    const user = await this.userRepository.findById(userId);
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    return user;
+  }
+
+  @Delete(':userId')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteUserById(@Param('userId') userId: string) {
+    await this.userRepository.delete(userId);
   }
 }

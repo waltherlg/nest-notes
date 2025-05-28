@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { IUserRepository } from '../domain/interfaces/user.repository.interface';
 import { CreateUserDomainDto } from '../domain/dto/user-domain-dto';
 import { UserUpdateInputDto, UserViewDto } from '../api/user-api-dto';
@@ -34,6 +34,10 @@ export class PrismaUserRepository implements IUserRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.prisma.prismaUser.delete({ where: { id } });
+    try {
+      const result = await this.prisma.prismaUser.delete({ where: { id } });
+    } catch (error) {
+      throw new NotFoundException('user not found');
+    }
   }
 }
