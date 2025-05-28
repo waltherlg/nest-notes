@@ -5,6 +5,6 @@ export interface IUserRepository {
   findAll(): Promise<UserViewDto[]>;
   findById(id: string): Promise<UserViewDto | null>;
   create(data: CreateUserDomainDto): Promise<UserViewDto>;
-  update(id: string, data: UserUpdateInputDto): Promise<UserViewDto>;
-  delete(id: string): Promise<void>;
+  update(id: string, data: UserUpdateInputDto): Promise<boolean>;
+  delete(id: string): Promise<boolean>;
 }

@@ -25,19 +25,20 @@ export class PrismaUserRepository implements IUserRepository {
     return createdUser;
   }
 
-  async update(id: string, data: UserUpdateInputDto): Promise<UserViewDto> {
+  async update(id: string, data: UserUpdateInputDto): Promise<boolean> {
     const updatedUser = await this.prisma.prismaUser.update({
       where: { id },
       data: { ...data },
     });
-    return updatedUser;
+    return !!updatedUser;
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string): Promise<boolean> {
     try {
       const result = await this.prisma.prismaUser.delete({ where: { id } });
+      return !!result;
     } catch (error) {
-      throw new NotFoundException('user not found');
+      return false;
     }
   }
 }
