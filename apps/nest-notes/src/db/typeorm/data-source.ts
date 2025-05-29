@@ -7,5 +7,5 @@ export default new DataSource({
   synchronize: false,
   entities: [TypeOrmUser],
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-  migrationsTableName: 'custom_migration_table',
+  migrationsTableName: 'typeorm_migration_table',
 });

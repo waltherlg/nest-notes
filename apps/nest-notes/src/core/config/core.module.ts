@@ -6,7 +6,7 @@ import { PrismaService } from '../../db/prisma/prisma.service';
 @Global()
 @Module({
   imports: [CqrsModule.forRoot()],
-  providers: [CoreConfig, PrismaService],
-  exports: [PrismaService, CqrsModule, CoreConfig],
+  providers: [CoreConfig],
+  exports: [CqrsModule, CoreConfig],
 })
 export class CoreConfigModule {}

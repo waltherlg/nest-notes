@@ -9,12 +9,12 @@ import { OrmSelectorService } from './core/config/orm.selector.service';
 import { ORMenum } from './db/orm.type';
 import { PrismaOrmModule } from './db/prisma/prisma.module';
 import typeOrmConfig from './db/typeorm/typeorm.config';
-import { TypeOrmOrmModule } from './db/typeorm/typeorm.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({})
 export class AppModule {
   static async register(): Promise<DynamicModule> {
-    const configService = new ConfigService(); // создаем вручную
+    const configService = new ConfigService();
     const ormSelector = new OrmSelectorService(configService);
 
     let ormModule;
@@ -23,7 +23,7 @@ export class AppModule {
         ormModule = PrismaOrmModule;
         break;
       case ORMenum.TYPEORM:
-        ormModule = TypeOrmOrmModule.forRoot(typeOrmConfig);
+        ormModule = TypeOrmModule.forRoot(typeOrmConfig);
         break;
       default:
         throw new Error(
