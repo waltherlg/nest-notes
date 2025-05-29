@@ -9,4 +9,4 @@ import { PrismaService } from '../../db/prisma/prisma.service';
   providers: [CoreConfig, PrismaService],
   exports: [PrismaService, CqrsModule, CoreConfig],
 })
-export class CoreModule {}
+export class CoreConfigModule {}

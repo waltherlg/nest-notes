@@ -1,20 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ORMenum } from '../../db/orm.type';
 
 @Injectable()
 export class OrmSelectorService {
-  constructor(private configService: ConfigService) {}
+  private readonly logger = new Logger(OrmSelectorService.name);
+  readonly currentOrm: ORMenum;
 
-  get orm(): ORMenum {
-    const raw = process.env.NODE_ENV_DB?.toLowerCase();
+  constructor(private readonly configService: ConfigService) {
+    const rawValue = this.configService.get<string>('NODE_ENV_DB', {
+      infer: true, // безопаснее при запуске без .env
+    });
 
-    if (!raw || !Object.values(ORMenum).includes(raw as ORMenum)) {
+    if (!rawValue) {
       throw new Error(
-        `Invalid or missing NODE_ENV_DB value. Expected one of: ${Object.values(ORMenum).join(', ')}`,
+        `NODE_ENV_DB is not set. Pass it using cross-env, e.g. "cross-env NODE_ENV_DB=prisma nest start"`,
       );
     }
 
-    return raw as ORMenum;
+    const normalized = rawValue.toLowerCase() as ORMenum;
+
+    if (!Object.values(ORMenum).includes(normalized)) {
+      throw new Error(
+        `Unsupported ORM "${rawValue}". Supported values: ${Object.values(ORMenum).join(', ')}`,
+      );
+    }
+
+    this.logger.log(`Active ORM: ${normalized}`);
+    this.currentOrm = normalized;
   }
 }

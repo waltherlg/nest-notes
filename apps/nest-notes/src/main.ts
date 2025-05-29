@@ -4,7 +4,8 @@ import { CoreConfig } from './core/config/core.config';
 import { appSetup } from './setup/app.setup';
 
 async function bootstrap() {
-  const appContext = await NestFactory.create(AppModule);
+  const appModule = await AppModule.register();
+  const appContext = await NestFactory.create(appModule);
   const coreConfig = appContext.get<CoreConfig>(CoreConfig);
   const port = coreConfig.port;
 
