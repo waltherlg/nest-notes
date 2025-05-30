@@ -4,10 +4,14 @@ import { UserViewDto, UserUpdateInputDto } from '../api/user-api-dto';
 import { CreateUserDomainDto } from '../domain/dto/user-domain-dto';
 import { Repository } from 'typeorm';
 import { TypeOrmUser } from '../../../db/typeorm/entity/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TypeOrmUserRepository implements IUserRepository {
-  constructor(private readonly userRepository: Repository<TypeOrmUser>) {}
+  constructor(
+    @InjectRepository(TypeOrmUser)
+    private readonly userRepository: Repository<TypeOrmUser>,
+  ) {}
 
   async findAll(): Promise<UserViewDto[]> {
     const users = await this.userRepository.find();

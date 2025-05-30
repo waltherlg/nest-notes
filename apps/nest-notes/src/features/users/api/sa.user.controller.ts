@@ -12,10 +12,11 @@ import {
 import { PrismaUserRepository } from '../infrastructure/prisma.user.repository';
 import { UserCreateInputDto } from './user-api-dto';
 import { CreateUserDomainDto } from '../domain/dto/user-domain-dto';
+import { IUserRepository } from '../domain/interfaces/user.repository.interface';
 
 @Controller('sa/users')
 export class UserController {
-  constructor(private readonly userRepository: PrismaUserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   @Post()
   async createUser(@Body() dto: UserCreateInputDto) {

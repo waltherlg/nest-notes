@@ -33,7 +33,12 @@ export class AppModule {
 
     return {
       module: AppModule,
-      imports: [configModule, CoreConfigModule, UserModule, ormModule],
+      imports: [
+        configModule,
+        CoreConfigModule,
+        ormModule,
+        UserModule.register(ormSelector.currentOrm),
+      ],
       controllers: [AppController],
       providers: [AppService],
     };
