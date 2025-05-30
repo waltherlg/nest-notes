@@ -9,7 +9,7 @@ export class OrmSelectorService {
 
   constructor(private readonly configService: ConfigService) {
     const rawValue = this.configService.get<string>('NODE_ENV_DB', {
-      infer: true, // безопаснее при запуске без .env
+      infer: true,
     });
 
     if (!rawValue) {

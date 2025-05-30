@@ -6,10 +6,11 @@ import { ORMenum } from '../../db/orm.type';
 import { TypeOrmUserRepository } from './infrastructure/typeorm.user.repository';
 import { IUserRepository } from './domain/interfaces/user.repository.interface';
 import { TypeOrmEntityModule } from '../../db/typeorm/typeorm.entity.module';
+import { currentOrm } from '../../core/constants/core.constants';
 
 @Module({})
 export class UserModule {
-  static register(currentOrm: ORMenum): DynamicModule {
+  static register(): DynamicModule {
     let userRepoProvider;
     let ormImports = [];
 
@@ -27,7 +28,7 @@ export class UserModule {
           provide: IUserRepository,
           useClass: TypeOrmUserRepository,
         };
-        ormImports = [TypeOrmEntityModule]; // содержит TypeOrmModule.forFeature([...])
+        ormImports = [TypeOrmEntityModule];
         break;
 
       default:
