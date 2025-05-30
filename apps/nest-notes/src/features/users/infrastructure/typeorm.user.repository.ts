@@ -22,6 +22,7 @@ export class TypeOrmUserRepository implements IUserRepository {
     const user: TypeOrmUser = await this.userRepository.findOne({
       where: [{ id }],
     });
+    console.log('typeOrm find by id');
     return user ? user : null;
   }
 

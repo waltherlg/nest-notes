@@ -3,10 +3,10 @@ import { PrismaService } from '../src/db/prisma/prisma.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
 import { appSetup } from '../src/setup/app.setup';
-import { cleanDb } from './db.helper';
 import { USER_PATHS } from '../src/features/users/config/user.constants';
 import { mockUserData } from './mocks/userMockFiles';
 import * as request from 'supertest';
+import { cleanDb } from './db.helper';
 
 describe('SA User CRUD (e2e)', () => {
   let app: INestApplication;
@@ -15,19 +15,17 @@ describe('SA User CRUD (e2e)', () => {
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [await AppModule.register()],
     }).compile();
 
     app = moduleFixture.createNestApplication();
     appSetup(app);
     await app.init();
 
-    prisma = app.get(PrismaService);
-    await cleanDb();
+    await cleanDb(app);
   });
 
   afterAll(async () => {
-    await prisma.$disconnect();
     await app.close();
   });
 

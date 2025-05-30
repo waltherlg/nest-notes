@@ -23,6 +23,7 @@
     "test:e2e": "jest --config ./apps/nest-notes/test/jest-e2e.json",
     "test:e2eNODE_ENV": "cross-env NODE_ENV=development jest --runInBand --config ./apps/nest-notes/test/jest-e2e.json",
     "test:e2e Dev Prisma": "cross-env NODE_ENV=development NODE_ENV_DB=prisma jest --runInBand --config ./apps/nest-notes/test/jest-e2e.json",
+    "test:e2e Dev TypeOrm": "cross-env NODE_ENV=development NODE_ENV_DB=typeorm jest --runInBand --config ./apps/nest-notes/test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
