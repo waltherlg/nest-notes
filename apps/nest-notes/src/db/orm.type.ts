@@ -1,6 +1,6 @@
 export enum ORMenum {
   PRISMA = 'prisma',
-  POSTGRESQL = 'postgresql',
+  RAWSQL = 'postgresql',
   TYPEORM = 'typeorm',
   MONGO = 'mongo',
   MONGOOSE = 'mongoose',

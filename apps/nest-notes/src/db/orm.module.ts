@@ -4,6 +4,7 @@ import { PrismaOrmModule } from './prisma/prisma.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import typeOrmConfig from './typeorm/typeorm.config';
 import { currentOrm } from '../core/constants/core.constants';
+import { PostgreSqlModule } from './rawsql/postgresql.module';
 
 @Module({})
 export class OrmModule {
@@ -17,6 +18,8 @@ export class OrmModule {
       case ORMenum.TYPEORM:
         selectedOrmModule = TypeOrmModule.forRoot(typeOrmConfig);
         break;
+      case ORMenum.postgresql:
+        selectedOrmModule = PostgreSqlModule.register();
       default:
         throw new Error(
           `Unsupported ORM "${currentOrm}". Available: ${Object.values(ORMenum).join(', ')}`,

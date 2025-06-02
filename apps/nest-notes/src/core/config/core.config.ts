@@ -35,6 +35,14 @@ export class CoreConfig {
     'TYPEORM_DATABASE_URL',
   );
 
+  @IsNotEmpty({
+    message:
+      'Set Env variable POSTRESQL_DATABASE_URL, example: postgresql://user:password@localhost:5432/my-data-base',
+  })
+  postgresqlDatabaseURL: string = this.configService.get<string>(
+    'POSTRESQL_DATABASE_URL',
+  );
+
   @IsEnum(Environments, {
     message:
       'Set correct NODE_ENV value, available values: ' +
