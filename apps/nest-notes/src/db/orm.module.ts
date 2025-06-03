@@ -18,7 +18,7 @@ export class OrmModule {
       case ORMenum.TYPEORM:
         selectedOrmModule = TypeOrmModule.forRoot(typeOrmConfig);
         break;
-      case ORMenum.postgresql:
+      case ORMenum.POSTGRESQL:
         selectedOrmModule = PostgreSqlModule.register();
       default:
         throw new Error(
