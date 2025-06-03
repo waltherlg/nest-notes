@@ -4,7 +4,7 @@ import { PrismaOrmModule } from './prisma/prisma.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import typeOrmConfig from './typeorm/typeorm.config';
 import { currentOrm } from '../core/constants/core.constants';
-import { PostgreSqlModule } from './rawsql/postgresql.module';
+import { PostgreSqlModule } from './postresql/postgresql.module';
 
 @Module({})
 export class OrmModule {

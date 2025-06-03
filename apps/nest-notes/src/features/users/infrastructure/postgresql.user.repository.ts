@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { IUserRepository } from '../domain/interfaces/user.repository.interface';
 import { UserViewDto, UserUpdateInputDto } from '../api/user-api-dto';
 import { CreateUserDomainDto } from '../domain/dto/user-domain-dto';
-import { RawSqlService } from '../../../db/rawsql/postgresql.service';
+import { PostgreSqlService } from '../../../db/postresql/postgresql.service';
 
 @Injectable()
 export class PostgreSqlUserRepository implements IUserRepository {
-  constructor(private readonly sql: RawSqlService) {}
+  constructor(private readonly sql: PostgreSqlService) {}
   findAll(): Promise<UserViewDto[]> {
     throw new Error('Method not implemented.');
   }

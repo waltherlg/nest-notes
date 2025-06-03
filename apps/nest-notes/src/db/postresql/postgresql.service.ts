@@ -3,7 +3,7 @@ import { Pool } from 'pg';
 import { CoreConfig } from '../../core/config/core.config';
 
 @Injectable()
-export class RawSqlService implements OnModuleDestroy {
+export class PostgreSqlService implements OnModuleDestroy {
   private pool: Pool;
 
   constructor(coreConfig: CoreConfig) {

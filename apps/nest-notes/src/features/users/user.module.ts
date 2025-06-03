@@ -8,7 +8,7 @@ import { IUserRepository } from './domain/interfaces/user.repository.interface';
 import { TypeOrmEntityModule } from '../../db/typeorm/typeorm.entity.module';
 import { currentOrm } from '../../core/constants/core.constants';
 import { PostgreSqlUserRepository } from './infrastructure/postgreSql.user.repository';
-import { PostgreSqlModule } from '../../db/rawsql/postgresql.module';
+import { PostgreSqlModule } from '../../db/postresql/postgresql.module';
 
 @Module({})
 export class UserModule {
@@ -38,7 +38,7 @@ export class UserModule {
           provide: IUserRepository,
           useClass: PostgreSqlUserRepository,
         };
-        ormImports = [PostgreSqlModule];
+        ormImports = [PostgreSqlModule.register()];
         break;
 
       default:
