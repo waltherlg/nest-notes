@@ -5,7 +5,7 @@ import { CreateUserDomainDto } from '../domain/dto/user-domain-dto';
 import { RawSqlService } from '../../../db/rawsql/postgresql.service';
 
 @Injectable()
-export class RawSqlUserRepository implements IUserRepository {
+export class PostgreSqlUserRepository implements IUserRepository {
   constructor(private readonly sql: RawSqlService) {}
   findAll(): Promise<UserViewDto[]> {
     throw new Error('Method not implemented.');

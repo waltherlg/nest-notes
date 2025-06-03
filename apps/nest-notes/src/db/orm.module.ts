@@ -20,6 +20,7 @@ export class OrmModule {
         break;
       case ORMenum.POSTGRESQL:
         selectedOrmModule = PostgreSqlModule.register();
+        break;
       default:
         throw new Error(
           `Unsupported ORM "${currentOrm}". Available: ${Object.values(ORMenum).join(', ')}`,

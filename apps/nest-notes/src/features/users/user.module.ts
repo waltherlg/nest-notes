@@ -7,6 +7,8 @@ import { TypeOrmUserRepository } from './infrastructure/typeorm.user.repository'
 import { IUserRepository } from './domain/interfaces/user.repository.interface';
 import { TypeOrmEntityModule } from '../../db/typeorm/typeorm.entity.module';
 import { currentOrm } from '../../core/constants/core.constants';
+import { PostgreSqlUserRepository } from './infrastructure/postgreSql.user.repository';
+import { PostgreSqlModule } from '../../db/rawsql/postgresql.module';
 
 @Module({})
 export class UserModule {
@@ -29,6 +31,14 @@ export class UserModule {
           useClass: TypeOrmUserRepository,
         };
         ormImports = [TypeOrmEntityModule];
+        break;
+
+      case ORMenum.POSTGRESQL:
+        userRepoProvider = {
+          provide: IUserRepository,
+          useClass: PostgreSqlUserRepository,
+        };
+        ormImports = [PostgreSqlModule];
         break;
 
       default:
